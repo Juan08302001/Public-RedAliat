@@ -5,94 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Asistente Virtual UTAN Industrias</title>
 <style>
-  body {
-    font-family: "Segoe UI", sans-serif;
-    margin: 0;
-    background: #e9eef6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  #chat-container {
-    background: #fff;
-    width: 95%;
-    max-width: 420px;
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    border-radius: 16px;
-    box-shadow: 0px 8px 22px rgba(0,0,0,0.15);
-    overflow: hidden;
-  }
-  #chat-header {
-    background: linear-gradient(135deg, #0d47a1, #1976d2);
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    font-weight: bold;
-    font-size: 1.3rem;
-    letter-spacing: 0.5px;
-  }
-  #chat-messages {
-    flex: 1;
-    padding: 1rem;
-    overflow-y: auto;
-    background: #f4f7fb;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-  .message {
-    max-width: 75%;
-    padding: 0.7rem 1rem;
-    border-radius: 18px;
-    font-size: 0.95rem;
-    line-height: 1.4;
-    animation: fadeIn 0.3s ease;
-  }
-  .bot {
-    background: #e3ebf8;
-    align-self: flex-start;
-    border-bottom-left-radius: 6px;
-  }
-  .user {
-    background: #1976d2;
-    color: #fff;
-    align-self: flex-end;
-    border-bottom-right-radius: 6px;
-  }
-  .options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  .chip {
-    background: #1976d2;
-    color: #fff;
-    padding: 0.5rem 0.9rem;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    border: none;
-    transition: 0.3s;
-  }
-  .chip:hover { background: #0d47a1; }
-  .typing {
-    font-style: italic;
-    font-size: 0.85rem;
-    color: #555;
-    animation: blink 1s infinite;
-  }
-  @keyframes blink {
-    0% {opacity: .2;}
-    50% {opacity: 1;}
-    100% {opacity: .2;}
-  }
-  @keyframes fadeIn {
-    from {opacity: 0; transform: translateY(10px);}
-    to {opacity: 1; transform: translateY(0);}
-  }
+  body { font-family: "Segoe UI", sans-serif; margin: 0; background: #e9eef6; display: flex; justify-content: center; align-items: center; height: 100vh;}
+  #chat-container { background: #ffffff; width: 95%; max-width: 430px; height: 92vh; display: flex; flex-direction: column; border-radius: 18px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); overflow: hidden; }
+  #chat-header { background: linear-gradient(135deg, #0d47a1, #1976d2); color: #fff; text-align: center; padding: 1rem; font-weight: bold; font-size: 1.3rem; letter-spacing: 0.5px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  #chat-messages { flex: 1; padding: 1rem; overflow-y: auto; background: #f4f7fb; display: flex; flex-direction: column; gap: 0.6rem; scroll-behavior: smooth; }
+  .message { max-width: 80%; padding: 0.8rem 1rem; border-radius: 18px; font-size: 0.95rem; line-height: 1.4; animation: fadeIn 0.3s ease; word-wrap: break-word; }
+  .bot { background: #e3ebf8; align-self: flex-start; border-bottom-left-radius: 6px; }
+  .user { background: #1976d2; color: #fff; align-self: flex-end; border-bottom-right-radius: 6px; }
+  .options { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top:0.3rem;}
+  .chip { background: #1976d2; color: #fff; padding: 0.6rem 1rem; border-radius: 22px; cursor: pointer; font-size: 0.9rem; border: none; transition: all 0.25s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+  .chip:hover { background: #0d47a1; transform: scale(1.05);}
+  .typing { font-style: italic; font-size: 0.85rem; color: #666; animation: blink 1s infinite; }
+  a { color: #0d47a1; text-decoration: none; font-weight: 600; }
+  a:hover { text-decoration: underline; }
+  @keyframes blink {0% {opacity: .2;} 50% {opacity: 1;} 100% {opacity: .2;} }
+  @keyframes fadeIn { from {opacity: 0; transform: translateY(8px);} to {opacity: 1; transform: translateY(0);} }
+  #chat-input-container { display: flex; padding: 0.5rem; background:#f4f7fb; border-top:1px solid #ccc; }
+  #chat-input { flex: 1; padding:0.6rem 1rem; border-radius: 20px; border:1px solid #ccc; font-size:0.95rem; }
+  #chat-send { margin-left: 0.5rem; padding:0.6rem 1rem; border:none; border-radius:20px; background:#1976d2; color:#fff; cursor:pointer; transition:0.3s; }
+  #chat-send:hover { background:#0d47a1; }
+  #chat-messages::-webkit-scrollbar { width: 6px; }
+  #chat-messages::-webkit-scrollbar-thumb { background: #b0c4de; border-radius: 3px; }
 </style>
 </head>
 <body>
@@ -100,117 +33,87 @@
 <div id="chat-container">
   <div id="chat-header">🤖 Asistente Virtual UTAN Industrias</div>
   <div id="chat-messages"></div>
+  <div id="chat-input-container">
+    <input type="text" id="chat-input" placeholder="Escribe tu pregunta o palabra clave...">
+    <button id="chat-send">Enviar</button>
+  </div>
 </div>
 
 <script>
-  const menu = {
-    inicio: {
-      question: "Hola 👋 Soy tu asistente virtual. ¿En qué área necesitas ayuda?",
-      options: [
-        { text: "📚 Servicios Escolares", next: "escolares" },
-        { text: "💻 Sistemas", next: "sistemas" },
-        { text: "💰 Finanzas", next: "finanzas" }
-      ]
-    },
-    escolares: {
-      question: "Preguntas frecuentes en Servicios Escolares:",
-      options: [
-        { text: "Entrega de documentos de nuevo ingreso", answer: "Debes entregar: acta de nacimiento, certificado de preparatoria, CURP, comprobante de pago y fotos tamaño infantil." },
-        { text: "Requisitos para Servicio Social", answer: "Debes haber cubierto al menos el 70% de créditos y llenar el formato en Servicios Escolares." },
-        { text: "Carga de materias", answer: "Si tienes problemas con tu carga de materias, acércate con tu coordinador de carrera." },
-        { text: "Solicitar constancias", answer: "Puedes solicitar constancias en Servicios Escolares o por correo institucional." },
-        { text: "⬅️ Menú principal", next: "inicio", reset: true }
-      ]
-    },
-    sistemas: {
-      question: "Preguntas frecuentes en Sistemas:",
-      options: [
-        { text: "No puedo entrar a Mi Red Aliat", answer: "Debes tener solo UNA app instalada. Si tienes dos, desinstálalas y mantén solo la más reciente." },
-        { text: "Problemas con Brightspace", answer: "Si Brightspace falla, escribe a mesa de ayuda: ayudaenlinea@aliat.edu.mx" },
-        { text: "Olvidé mi contraseña", answer: "Envía un correo a ayudaenlinea@redaliat.mx con tu nombre, matrícula, carrera y campus." },
-        { text: "Licencia de Office", answer: "Tu cuenta incluye Office 365 online. No instales local, ya que después de 3 meses marcará como inactiva." },
-        { text: "⬅️ Menú principal", next: "inicio", reset: true }
-      ]
-    },
-    finanzas: {
-      question: "Preguntas frecuentes en Finanzas:",
-      options: [
-        { text: "Costo de inscripción", answer: "El costo depende del campus. Consulta en caja o portal institucional." },
-        { text: "Costo de reinscripción", answer: "El costo de reinscripción es de $XXX MXN. Confirma en Finanzas." },
-        { text: "Constancia sencilla", answer: "La constancia sencilla tiene un costo de $XX MXN y se solicita en Finanzas o vía portal." },
-        { text: "Constancia con calificaciones y foto", answer: "La constancia con calificaciones y foto tiene un costo de $XX MXN. Tramítala en Finanzas." },
-        { text: "Formas de pago", answer: "Puedes pagar con tarjeta de débito, crédito o efectivo." },
-        { text: "Pago en OXXO", answer: "Sí, puedes pagar en OXXO con la referencia de Finanzas." },
-        { text: "⬅️ Menú principal", next: "inicio", reset: true }
-      ]
+const menu = {
+  inicio: { question: "👋 ¡Hola! Soy tu asistente virtual UTAN Industrias. ¿En qué área necesitas ayuda?", options: [
+    { text: "📚 Servicios Escolares", next: "escolares" },
+    { text: "💻 Sistemas", next: "sistemas" },
+    { text: "💰 Finanzas", next: "finanzas" }
+  ]},
+  escolares: { question: "📚 Preguntas frecuentes en Servicios Escolares:", options: [
+    { text: "Entrega de documentos de nuevo ingreso", answer: "Debes entregar: acta de nacimiento, certificado de preparatoria, CURP, comprobante de pago y fotos tamaño infantil." },
+    { text: "Requisitos para Servicio Social", answer: "Debes haber cubierto al menos el 70% de créditos y llenar el formato correspondiente en Servicios Escolares." },
+    { text: "Carga de materias", answer: "Si tienes problemas con tu carga de materias, acércate con tu coordinador de carrera." },
+    { text: "Solicitar constancias", answer: "Puedes solicitar constancias directamente en Servicios Escolares o por correo institucional." },
+    { text: "⬅️ Volver al menú principal", next: "inicio", reset: true }
+  ]},
+  sistemas: { question: "💻 Preguntas frecuentes en Sistemas:", options: [
+    { text: "No puedo entrar a Mi Red Aliat", answer: "Debes tener solo una app instalada. Si tienes dos, desinstálalas y deja solo la más reciente. Verifica en Ajustes → Aplicaciones. Recuerda no tener adeudos." },
+    { text: "Problemas con Brightspace", answer: "Si Brightspace falla o no te aparecen tareas, contacta a soporte de tu campus. Incluye tu nombre completo, ID, licenciatura y campus." },
+    { text: "Olvidé mi contraseña de Brightspace o correo", answer: "Contacta al soporte de tu campus con tu nombre, ID, carrera y campus." },
+    { text: "Licencia de Office", answer: "Tu cuenta incluye Office 365 online (solo navegador). No instales la versión local, ya que después de 3 meses se marcará como inactiva." },
+    { text: "⬅️ Volver al menú principal", next: "inicio", reset: true }
+  ]},
+  finanzas: { question: "💰 Preguntas frecuentes en Finanzas:", options: [
+    { text: "Costo de constancia de estudios", answer: "El costo es de $215.00. Puedes pagar en línea o en caja del campus." },
+    { text: "Costo de constancia con calificaciones", answer: "El costo es de $365.00. Puedes pagar en línea o en caja del campus." },
+    { text: "Costo de Kardex", answer: "El costo es de $215.00. Disponible para pago en línea o en caja del campus." },
+    { text: "Devolución de documentos por baja definitiva", answer: "El costo es de $380.00. Puedes realizar el pago en línea o directamente en caja." },
+    { text: "Préstamo de documentos originales", answer: "El costo es de $380.00. Paga en línea o en caja del campus." },
+    { text: "Constancia para seguro facultativo", answer: "El costo es de $215.00. Disponible para pago en línea o en caja del campus." },
+    { text: "Historial académico", answer: "El costo es de $105.00. Puedes pagarlo en línea o en caja." },
+    { text: "Baja definitiva", answer: "El costo es de $1,115.00. Paga en línea o en caja del campus." },
+    { text: "Baja temporal", answer: "El costo es de $365.00. Puedes pagar en línea o directamente en caja." },
+    { text: "Cambio de modalidad", answer: "El costo es de $1,295.00. Paga en línea o en caja del campus." },
+    { text: "Certificado parcial", answer: "El costo es de $3,320.00. Disponible para pago en línea o en caja del campus." },
+    { text: "Certificado total", answer: "El costo es de $3,320.00. Disponible para pago en línea o en caja del campus." },
+    { text: "Seguro escolar", answer: "El costo es de $335.00. Puedes pagar en línea o en caja." },
+    { text: "Copias", answer: "El costo es de $5.00 por copia. Paga directamente en caja del campus." },
+    { text: "⬅️ Volver al menú principal", next: "inicio", reset: true }
+  ]}
+};
+
+const chat = document.getElementById("chat-messages");
+const inputText = document.getElementById("chat-input");
+const sendBtn = document.getElementById("chat-send");
+let currentSection = "inicio";
+
+function addMessage(text,sender="bot") { const div = document.createElement("div"); div.classList.add("message",sender); div.innerHTML=text; chat.appendChild(div); chat.scrollTop=chat.scrollHeight; }
+function showOptions(options, sectionKey){ const optDiv=document.createElement("div"); optDiv.classList.add("options"); options.forEach(opt=>{ const btn=document.createElement("button"); btn.classList.add("chip"); btn.textContent=opt.text; btn.onclick=()=>handleOption(opt, sectionKey); optDiv.appendChild(btn); }); chat.appendChild(optDiv); chat.scrollTop=chat.scrollHeight; }
+function typingEffect(callback,ms=700){ const typingDiv=document.createElement("div"); typingDiv.classList.add("typing"); typingDiv.textContent="Escribiendo..."; chat.appendChild(typingDiv); chat.scrollTop=chat.scrollHeight; setTimeout(()=>{ chat.removeChild(typingDiv); callback(); }, ms); }
+function renderSection(key){ currentSection=key; const section=menu[key]; typingEffect(()=>{ addMessage(section.question,"bot"); showOptions(section.options,key); }); }
+function handleOption(opt, sectionKey){ addMessage(opt.text,"user"); if(opt.reset){ resetChat(); } else if(opt.answer){ typingEffect(()=>{ addMessage(opt.answer,"bot"); showOptions([{text:"⬅️ Regresar",next:sectionKey},{text:"🏠 Menú principal",next:"inicio",reset:true}],sectionKey); }); } else if(opt.next){ renderSection(opt.next); } }
+function resetChat(){ chat.innerHTML=""; renderSection("inicio"); }
+
+// Búsqueda aproximada y selección automática
+function handleUserText(){
+  const text = inputText.value.trim().toLowerCase();
+  if(!text) return;
+  addMessage(inputText.value,'user');
+  inputText.value='';
+
+  const section = menu[currentSection];
+  const match = section.options.find(opt=>opt.text.toLowerCase().includes(text));
+  typingEffect(()=>{
+    if(match){
+      handleOption(match,currentSection);
+    }else{
+      addMessage("No encontré una coincidencia exacta, pero puedes volver al menú y seleccionar la opción que necesites.","bot");
+      showOptions(section.options,currentSection);
     }
-  };
+  });
+}
 
-  const chat = document.getElementById("chat-messages");
+sendBtn.addEventListener("click", handleUserText);
+inputText.addEventListener("keypress",e=>{if(e.key==="Enter") handleUserText();});
 
-  function addMessage(text, sender="bot") {
-    const div = document.createElement("div");
-    div.classList.add("message", sender);
-    div.textContent = text;
-    chat.appendChild(div);
-    chat.scrollTop = chat.scrollHeight;
-  }
-
-  function showOptions(options, sectionKey) {
-    const optDiv = document.createElement("div");
-    optDiv.classList.add("options");
-    options.forEach(opt => {
-      const btn = document.createElement("button");
-      btn.classList.add("chip");
-      btn.textContent = opt.text;
-      btn.onclick = () => handleOption(opt, sectionKey);
-      optDiv.appendChild(btn);
-    });
-    chat.appendChild(optDiv);
-    chat.scrollTop = chat.scrollHeight;
-  }
-
-  function typingEffect(callback) {
-    const typingDiv = document.createElement("div");
-    typingDiv.classList.add("typing");
-    typingDiv.textContent = "Escribiendo...";
-    chat.appendChild(typingDiv);
-    chat.scrollTop = chat.scrollHeight;
-    setTimeout(() => {
-      chat.removeChild(typingDiv);
-      callback();
-    }, 800);
-  }
-
-  function renderSection(key) {
-    const section = menu[key];
-    typingEffect(() => {
-      addMessage(section.question, "bot");
-      showOptions(section.options, key);
-    });
-  }
-
-  function handleOption(opt, sectionKey) {
-    addMessage(opt.text, "user");
-    if (opt.reset) {
-      resetChat(); // 🔥 limpia y vuelve al inicio
-    } else if (opt.answer) {
-      typingEffect(() => {
-        addMessage(opt.answer, "bot");
-        showOptions([{text:"⬅️ Regresar", next:sectionKey}, {text:"🏠 Menú principal", next:"inicio", reset:true}], sectionKey);
-      });
-    } else if (opt.next) {
-      renderSection(opt.next);
-    }
-  }
-
-  function resetChat() {
-    chat.innerHTML = "";  // 🔥 borra todo el historial
-    renderSection("inicio");
-  }
-
-  // inicia en el menú
-  renderSection("inicio");
+renderSection("inicio");
 </script>
 
 </body>
