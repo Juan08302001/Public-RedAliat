@@ -37,10 +37,17 @@
     font-weight: 700;
     font-size: 1.35rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
+    gap: 6px;
     letter-spacing: 0.5px;
+  }
+
+  #version {
+    font-size: 0.75rem;
+    font-weight: 400;
+    opacity: 0.8;
+    color: #d1d5db; /* gris suave */
   }
 
   /* --- Mensajes --- */
@@ -166,7 +173,10 @@
 <body>
 
 <div id="chat-container">
-  <div id="chat-header">🤖 Asistente Virtual UTAN Industrias</div>
+  <div id="chat-header">
+    🤖 Asistente Virtual UTAN Industrias
+    <span id="version">v1.0 — Próximas actualizaciones disponibles</span>
+  </div>
   <div id="chat-messages"></div>
 </div>
 
@@ -286,10 +296,19 @@ function handleOption(opt, sectionKey) {
 
 function resetChat() {
   chat.innerHTML = "";
+  showVersionMessage();
   renderSection("inicio");
 }
 
+// --- Mensaje de versión ---
+function showVersionMessage() {
+  addMessage("📌 Esta es la versión 1.0 de tu asistente virtual. Próximamente tendrá mejoras y nuevas funciones.", "bot");
+}
+
+// --- Iniciar chat ---
+showVersionMessage();
 renderSection("inicio");
+
 </script>
 
 </body>
