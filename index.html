@@ -4,27 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Asistente Virtual UTAN Industrias</title>
+<title>Asistente Virtual UTAN - Sistemas</title>
 
 <style>
-
-/* ================================
-   CONFIGURACIÓN GENERAL
-================================ */
-
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: "Inter", "Segoe UI", Arial, sans-serif;
   margin: 0;
   min-height: 100vh;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
 
   background:
-    radial-gradient(circle at top left, #dbeafe 0%, transparent 35%),
-    radial-gradient(circle at bottom right, #bfdbfe 0%, transparent 35%),
-    #eef4fb;
+    radial-gradient(circle at 10% 10%, #dbeafe, transparent 30%),
+    radial-gradient(circle at 90% 90%, #bfdbfe, transparent 30%),
+    #f1f5f9;
 
   display: flex;
   justify-content: center;
@@ -38,33 +33,34 @@ body {
 
 #chat-container {
   width: 95%;
-  max-width: 520px;
+  max-width: 540px;
   height: 92vh;
-
-  background: rgba(255,255,255,0.92);
 
   display: flex;
   flex-direction: column;
+
+  background: #f8fafc;
 
   border-radius: 28px;
 
   overflow: hidden;
 
   box-shadow:
-    0 25px 60px rgba(15,23,42,0.15),
-    0 5px 15px rgba(30,64,175,0.08);
-
-  backdrop-filter: blur(15px);
-
-  border: 1px solid rgba(255,255,255,0.7);
+    0 25px 70px rgba(15, 23, 42, .16),
+    0 5px 20px rgba(37, 99, 235, .08);
 }
 
 
 /* ================================
-   CABECERA
+   HEADER
 ================================ */
 
 #chat-header {
+  position: relative;
+
+  padding: 18px 20px;
+
+  color: white;
 
   background:
     linear-gradient(
@@ -74,17 +70,9 @@ body {
       #2563eb
     );
 
-  color: white;
-
-  padding: 18px 20px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  position: relative;
-
-  box-shadow: 0 5px 20px rgba(30,58,138,0.25);
 }
 
 
@@ -96,122 +84,97 @@ body {
 
 
 .bot-icon {
-
   width: 48px;
   height: 48px;
 
   border-radius: 15px;
 
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,.15);
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  font-size: 25px;
-
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.15),
-    0 5px 15px rgba(0,0,0,0.12);
+  font-size: 24px;
 }
 
 
 .header-title {
   font-size: 1.05rem;
   font-weight: 700;
-  letter-spacing: 0.2px;
 }
 
 
 .header-subtitle {
+  margin-top: 4px;
 
-  font-size: 0.72rem;
+  font-size: .72rem;
 
-  opacity: 0.85;
-
-  margin-top: 3px;
+  color: #dbeafe;
 
   display: flex;
   align-items: center;
-
   gap: 5px;
 }
 
 
 .status-dot {
-
   width: 7px;
   height: 7px;
 
-  background: #4ade80;
-
   border-radius: 50%;
+
+  background: #4ade80;
 
   box-shadow: 0 0 8px #4ade80;
 }
 
 
-.version-badge {
-
+.version {
   position: absolute;
 
-  top: 9px;
   right: 12px;
+  top: 8px;
 
-  font-size: 0.62rem;
-
-  padding: 4px 7px;
-
-  border-radius: 10px;
-
-  background: rgba(255,255,255,0.12);
+  font-size: .6rem;
 
   color: #dbeafe;
 }
 
 
 /* ================================
-   ÁREA DE MENSAJES
+   CHAT
 ================================ */
 
 #chat-messages {
-
   flex: 1;
-
-  padding: 22px 18px;
 
   overflow-y: auto;
 
-  display: flex;
+  padding: 20px 17px;
 
+  display: flex;
   flex-direction: column;
 
-  gap: 13px;
+  gap: 12px;
 
   scroll-behavior: smooth;
 
   background:
     linear-gradient(
-      rgba(239,246,255,0.88),
-      rgba(248,250,252,0.95)
+      180deg,
+      #eff6ff,
+      #f8fafc
     );
 }
 
 
-/* Scroll */
-
 #chat-messages::-webkit-scrollbar {
-  width: 6px;
-}
-
-#chat-messages::-webkit-scrollbar-track {
-  background: transparent;
+  width: 5px;
 }
 
 #chat-messages::-webkit-scrollbar-thumb {
-
   background: #bfdbfe;
-
   border-radius: 20px;
 }
 
@@ -221,62 +184,47 @@ body {
 ================================ */
 
 .message {
+  max-width: 88%;
 
-  max-width: 84%;
-
-  padding: 13px 16px;
+  padding: 13px 15px;
 
   border-radius: 18px;
 
-  font-size: 0.93rem;
+  font-size: .9rem;
 
   line-height: 1.55;
 
-  word-wrap: break-word;
-
   opacity: 0;
 
-  transform: translateY(12px) scale(0.98);
+  transform: translateY(10px);
 
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
-
-  animation: none;
+  transition: .3s ease;
 }
 
 
 .message.show {
-
   opacity: 1;
-
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
 }
 
 
-/* Bot */
-
 .bot {
-
   align-self: flex-start;
 
   background: white;
 
   color: #1e293b;
 
+  border: 1px solid #e2e8f0;
+
   border-bottom-left-radius: 5px;
 
-  border: 1px solid #e5e7eb;
-
   box-shadow:
-    0 5px 18px rgba(15,23,42,0.06);
+    0 5px 18px rgba(15,23,42,.05);
 }
 
 
-/* Usuario */
-
 .user {
-
   align-self: flex-end;
 
   color: white;
@@ -291,16 +239,15 @@ body {
   border-bottom-right-radius: 5px;
 
   box-shadow:
-    0 6px 18px rgba(37,99,235,0.22);
+    0 5px 16px rgba(37,99,235,.2);
 }
 
 
 /* ================================
-   MENSAJE DE BIENVENIDA
+   BIENVENIDA
 ================================ */
 
-.welcome-card {
-
+.welcome {
   background:
     linear-gradient(
       135deg,
@@ -310,31 +257,27 @@ body {
 
   border: 1px solid #dbeafe;
 
-  border-radius: 18px;
+  border-radius: 17px;
 
   padding: 15px;
-
-  margin-bottom: 4px;
 }
 
 
 .welcome-title {
-
-  font-weight: 700;
-
   color: #1e3a8a;
 
   font-size: 1rem;
 
-  margin-bottom: 5px;
+  font-weight: 700;
+
+  margin-bottom: 6px;
 }
 
 
 .welcome-text {
-
   color: #475569;
 
-  font-size: 0.88rem;
+  font-size: .86rem;
 }
 
 
@@ -343,16 +286,15 @@ body {
 ================================ */
 
 .options {
-
   display: flex;
 
   flex-direction: column;
 
   gap: 9px;
 
-  margin-top: 5px;
-
   width: 100%;
+
+  margin-top: 4px;
 }
 
 
@@ -366,15 +308,11 @@ body {
 
   color: #1e3a8a;
 
-  padding: 12px 14px;
+  border-radius: 15px;
 
-  border-radius: 14px;
+  padding: 11px 12px;
 
   cursor: pointer;
-
-  font-size: 0.88rem;
-
-  font-weight: 600;
 
   text-align: left;
 
@@ -382,16 +320,16 @@ body {
 
   align-items: center;
 
-  gap: 10px;
+  gap: 11px;
 
-  transition:
-    transform 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease,
-    border 0.2s ease;
+  font-size: .86rem;
+
+  font-weight: 600;
+
+  transition: .2s ease;
 
   box-shadow:
-    0 3px 10px rgba(15,23,42,0.04);
+    0 3px 10px rgba(15,23,42,.04);
 }
 
 
@@ -404,26 +342,19 @@ body {
   border-color: #93c5fd;
 
   box-shadow:
-    0 7px 18px rgba(37,99,235,0.12);
+    0 7px 18px rgba(37,99,235,.12);
 }
 
 
 .chip:active {
-
-  transform: scale(0.98);
+  transform: scale(.98);
 }
 
 
-/* ================================
-   ICONOS DE BOTONES
-================================ */
+.icon {
 
-.option-icon {
-
-  width: 34px;
-  height: 34px;
-
-  flex-shrink: 0;
+  min-width: 35px;
+  height: 35px;
 
   border-radius: 10px;
 
@@ -432,7 +363,6 @@ body {
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 
   font-size: 17px;
@@ -440,112 +370,88 @@ body {
 
 
 /* ================================
-   BOTÓN REINICIAR
+   TARJETAS DE AVISO
 ================================ */
 
-.restart-container {
+.alert {
 
-  padding: 10px 18px 15px;
+  padding: 12px;
 
-  background: rgba(248,250,252,0.95);
+  border-radius: 13px;
 
-  border-top: 1px solid #e5e7eb;
+  margin-top: 8px;
 
+  font-size: .83rem;
 }
 
 
-.restart-button {
+.alert-warning {
 
-  width: 100%;
+  background: #fff7ed;
 
-  border: none;
+  border: 1px solid #fed7aa;
 
-  background: transparent;
+  color: #9a3412;
+}
 
-  color: #64748b;
 
-  padding: 8px;
+.alert-danger {
+
+  background: #fef2f2;
+
+  border: 1px solid #fecaca;
+
+  color: #991b1b;
+}
+
+
+.alert-success {
+
+  background: #f0fdf4;
+
+  border: 1px solid #bbf7d0;
+
+  color: #166534;
+}
+
+
+.step {
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  padding: 9px 11px;
+
+  margin: 7px 0;
 
   border-radius: 10px;
 
-  cursor: pointer;
-
-  font-size: 0.78rem;
-
-  transition: 0.2s ease;
-}
-
-
-.restart-button:hover {
-
-  background: #f1f5f9;
-
-  color: #1e3a8a;
+  font-size: .84rem;
 }
 
 
 /* ================================
-   INDICADOR DE ESCRITURA
+   LABEL
 ================================ */
 
-.typing {
+.label {
 
-  align-self: flex-start;
+  display: inline-block;
 
-  background: white;
+  padding: 4px 8px;
 
-  border: 1px solid #e5e7eb;
+  border-radius: 7px;
 
-  border-radius: 16px;
+  background: #eff6ff;
 
-  padding: 10px 14px;
+  color: #2563eb;
 
-  display: flex;
+  font-size: .68rem;
 
-  align-items: center;
+  font-weight: 700;
 
-  gap: 5px;
-
-  box-shadow:
-    0 4px 12px rgba(15,23,42,0.05);
-}
-
-
-.dot {
-
-  width: 6px;
-  height: 6px;
-
-  background: #3b82f6;
-
-  border-radius: 50%;
-
-  animation: typing 1.2s infinite;
-}
-
-
-.dot:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-
-.dot:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-
-@keyframes typing {
-
-  0%, 60%, 100% {
-    transform: translateY(0);
-    opacity: 0.35;
-  }
-
-  30% {
-    transform: translateY(-4px);
-    opacity: 1;
-  }
-
+  margin-bottom: 6px;
 }
 
 
@@ -557,9 +463,9 @@ a {
 
   color: #2563eb;
 
-  text-decoration: none;
-
   font-weight: 700;
+
+  text-decoration: none;
 }
 
 
@@ -569,46 +475,116 @@ a:hover {
 
 
 /* ================================
-   RESALTADOS
+   TYPING
 ================================ */
 
-.highlight {
+.typing {
 
-  color: #1d4ed8;
+  display: flex;
 
-  font-weight: 700;
+  gap: 5px;
+
+  align-items: center;
+
+  padding: 10px 13px;
+
+  background: white;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 15px;
+
+  align-self: flex-start;
+}
+
+
+.dot {
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #3b82f6;
+
+  animation: typing 1.2s infinite;
+}
+
+
+.dot:nth-child(2) {
+  animation-delay: .2s;
+}
+
+
+.dot:nth-child(3) {
+  animation-delay: .4s;
+}
+
+
+@keyframes typing {
+
+  0%,60%,100% {
+    transform: translateY(0);
+    opacity: .35;
+  }
+
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+
 }
 
 
 /* ================================
-   ETIQUETAS DE RESPUESTA
+   FOOTER
 ================================ */
 
-.info-label {
+.footer {
 
-  display: inline-block;
+  padding: 10px 16px 14px;
 
-  font-size: 0.7rem;
+  border-top: 1px solid #e2e8f0;
 
-  font-weight: 700;
+  background: #fff;
+}
 
-  color: #2563eb;
+
+.restart {
+
+  width: 100%;
+
+  border: none;
+
+  background: #f8fafc;
+
+  color: #64748b;
+
+  padding: 8px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-size: .77rem;
+
+  transition: .2s;
+}
+
+
+.restart:hover {
 
   background: #eff6ff;
 
-  padding: 4px 8px;
-
-  border-radius: 7px;
-
-  margin-bottom: 7px;
+  color: #1e3a8a;
 }
 
 
 /* ================================
-   RESPONSIVE
+   MÓVIL
 ================================ */
 
-@media (max-width: 480px) {
+@media(max-width:480px) {
 
   body {
     align-items: stretch;
@@ -620,72 +596,16 @@ a:hover {
 
     height: 100vh;
 
-    max-width: none;
-
     border-radius: 0;
-
-  }
-
-  #chat-header {
-    padding: 15px;
   }
 
   #chat-messages {
-    padding: 18px 13px;
+    padding: 17px 12px;
   }
 
   .message {
-    max-width: 90%;
-    font-size: 0.9rem;
-  }
-
-  .chip {
-    font-size: 0.86rem;
-  }
-
-}
-
-
-/* ================================
-   ANIMACIÓN DEL HEADER
-================================ */
-
-#chat-header::after {
-
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  height: 2px;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #60a5fa,
-      transparent
-    );
-
-  animation: shine 3s infinite;
-}
-
-
-@keyframes shine {
-
-  0% {
-    opacity: 0.2;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0.2;
+    max-width: 92%;
+    font-size: .88rem;
   }
 
 }
@@ -700,64 +620,58 @@ a:hover {
 <div id="chat-container">
 
 
-  <!-- ============================
-       HEADER
-  ============================= -->
+<!-- HEADER -->
 
-  <div id="chat-header">
+<div id="chat-header">
 
-    <div class="header-left">
+  <div class="header-left">
 
-      <div class="bot-icon">
-        🤖
+    <div class="bot-icon">
+      🤖
+    </div>
+
+    <div>
+
+      <div class="header-title">
+        Asistente Virtual UTAN
       </div>
 
-      <div>
+      <div class="header-subtitle">
 
-        <div class="header-title">
-          Asistente Virtual UTAN
-        </div>
+        <span class="status-dot"></span>
 
-        <div class="header-subtitle">
-
-          <span class="status-dot"></span>
-
-          Sistemas • En línea
-
-        </div>
+        Sistemas · En línea
 
       </div>
 
     </div>
 
-    <div class="version-badge">
-      v2.0
-    </div>
-
   </div>
 
-
-  <!-- ============================
-       CHAT
-  ============================= -->
-
-  <div id="chat-messages"></div>
-
-
-  <!-- ============================
-       REINICIAR
-  ============================= -->
-
-  <div class="restart-container">
-
-    <button
-      class="restart-button"
-      onclick="restartChat()"
-    >
-      🔄 Reiniciar conversación
-    </button>
-
+  <div class="version">
+    v3.0
   </div>
+
+</div>
+
+
+<!-- CHAT -->
+
+<div id="chat-messages"></div>
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+  <button
+    class="restart"
+    onclick="restartChat()"
+  >
+    🔄 Volver al inicio
+  </button>
+
+</div>
 
 
 </div>
@@ -766,190 +680,374 @@ a:hover {
 <script>
 
 
-/* ==================================
-   INFORMACIÓN DE SISTEMAS
-================================== */
+/* ==========================================
+   DATOS DEL ASISTENTE
+========================================== */
 
 const menu = {
 
-  sistemas: {
+  inicio: {
 
     question:
-      "¿Qué problema necesitas resolver? Selecciona una opción y te proporcionaré los pasos correspondientes.",
+      "¿Qué necesitas resolver? Elige una opción para comenzar.",
 
     options: [
 
       {
-
-        text: "No puedo entrar a Mi Red Aliat",
-
+        text: "📱 No puedo entrar a Mi Red Aliat",
         icon: "📱",
-
-        answer: `
-          <span class="info-label">MI RED ALIAT</span><br>
-
-          Si no puedes ingresar a Mi Red Aliat, realiza las siguientes comprobaciones:
-
-          <br><br>
-
-          <strong>1.</strong> Verifica que solo tengas una aplicación instalada.<br>
-          <strong>2.</strong> Si tienes dos aplicaciones, desinstálalas y conserva únicamente la más reciente.<br>
-          <strong>3.</strong> Puedes verificarlo desde <strong>Ajustes → Aplicaciones</strong>.<br>
-          <strong>4.</strong> Comprueba que no tengas algún adeudo pendiente.
-
-          <br><br>
-
-          💡 <strong>Recomendación:</strong> después de realizar los cambios, reinicia tu dispositivo e intenta ingresar nuevamente.
-        `
-
+        next: "redaliat"
       },
 
-
       {
-
-        text: "Problemas con Brightspace",
-
+        text: "📚 Tengo problemas con Brightspace",
         icon: "📚",
-
-        answer: `
-          <span class="info-label">BRIGHTSPACE</span><br>
-
-          Si Brightspace presenta errores, no carga correctamente o no aparecen tus tareas mientras que a tus compañeros sí, solicita apoyo al área correspondiente.
-
-          <br><br>
-
-          📧 <strong>Correo:</strong><br>
-
-          <a href="mailto:ayudaenlinea@redaliat.mx">
-            ayudaenlinea@redaliat.mx
-          </a>
-
-          <br><br>
-
-          📱 <strong>WhatsApp:</strong><br>
-
-          <a
-            href="https://wa.me/525578881566?text=Hola%2C%20tengo%20un%20problema%20con%20Brightspace"
-            target="_blank"
-          >
-            55 7888 1566
-          </a>
-
-          <br><br>
-
-          Para agilizar la atención, incluye:
-
-          <br><br>
-
-          • Nombre completo<br>
-          • ID (E+00000+)<br>
-          • Licenciatura<br>
-          • Campus
-
-          <br><br>
-
-          💡 <strong>Tip:</strong> si el problema ocurre únicamente en tu cuenta, menciona exactamente qué actividad o materia presenta el error.
-        `
-
+        next: "brightspace"
       },
 
-
       {
-
-        text: "Olvidé mi contraseña de Brightspace o correo",
-
+        text: "🔑 Olvidé mi contraseña",
         icon: "🔑",
-
-        answer: `
-          <span class="info-label">RECUPERACIÓN DE CONTRASEÑA</span><br>
-
-          Si olvidaste tu contraseña de Brightspace o de tu correo institucional, solicita asistencia mediante los siguientes medios:
-
-          <br><br>
-
-          📧 <strong>Correo:</strong><br>
-
-          <a href="mailto:ayudaenlinea@redaliat.mx">
-            ayudaenlinea@redaliat.mx
-          </a>
-
-          <br><br>
-
-          📱 <strong>WhatsApp:</strong><br>
-
-          <a
-            href="https://wa.me/525578881566?text=Hola%2C%20olvid%C3%A9%20mi%20contrase%C3%B1a"
-            target="_blank"
-          >
-            55 7888 1566
-          </a>
-
-          <br><br>
-
-          Incluye la siguiente información:
-
-          <br><br>
-
-          • Nombre completo<br>
-          • ID<br>
-          • Carrera<br>
-          • Campus
-
-          <br><br>
-
-          🔐 <strong>Importante:</strong> no compartas tu contraseña actual ni datos sensibles en el mensaje.
-        `
-
+        next: "password"
       },
 
+      {
+        text: "📧 Problemas al entrar a mi correo",
+        icon: "📧",
+        next: "correo"
+      },
 
       {
-
-        text: "Licencia de Office",
-
+        text: "💻 Tengo dudas sobre Office",
         icon: "💻",
+        next: "office"
+      },
 
-        answer: `
-          <span class="info-label">OFFICE 365</span><br>
-
-          Tu cuenta institucional incluye acceso a <strong>Office 365 en línea</strong>.
-
-          <br><br>
-
-          🌐 Puedes utilizar las aplicaciones directamente desde el navegador.
-
-          <br><br>
-
-          ⚠️ <strong>Importante:</strong>
-
-          <br><br>
-
-          No instales la versión local de Office con esta cuenta, ya que después de aproximadamente <strong>3 meses</strong> puede marcarse como inactiva.
-
-          <br><br>
-
-          💡 <strong>Recomendación:</strong> utiliza la versión en línea para evitar problemas de activación.
-        `
-
+      {
+        text: "🛡️ Recibí un correo sospechoso",
+        icon: "🛡️",
+        next: "seguridad"
       }
 
     ]
+
+  },
+
+
+  /* ==============================
+     MI RED ALIAT
+  ============================== */
+
+  redaliat: {
+
+    question:
+      "Vamos a revisar tu acceso a Mi Red Aliat paso a paso.",
+
+    answer: `
+
+      <span class="label">MI RED ALIAT</span>
+
+      <div class="step">
+        <strong>1.</strong> Revisa que tengas instalada únicamente la aplicación más reciente.
+      </div>
+
+      <div class="step">
+        <strong>2.</strong> Si aparecen dos aplicaciones relacionadas, desinstala la versión anterior.
+      </div>
+
+      <div class="step">
+        <strong>3.</strong> Puedes comprobarlo desde:
+        <strong>Ajustes → Aplicaciones</strong>.
+      </div>
+
+      <div class="step">
+        <strong>4.</strong> Verifica que no tengas algún adeudo pendiente.
+      </div>
+
+      <div class="alert alert-success">
+        💡 Después de realizar estos pasos, intenta iniciar sesión nuevamente.
+      </div>
+
+    `
+
+  },
+
+
+  /* ==============================
+     BRIGHTSPACE
+  ============================== */
+
+  brightspace: {
+
+    question:
+      "Si Brightspace no funciona correctamente, sigue estas indicaciones.",
+
+    answer: `
+
+      <span class="label">BRIGHTSPACE</span>
+
+      <div class="step">
+        <strong>1.</strong> Comprueba que tengas conexión a Internet.
+      </div>
+
+      <div class="step">
+        <strong>2.</strong> Cierra sesión y vuelve a iniciar sesión.
+      </div>
+
+      <div class="step">
+        <strong>3.</strong> Si no aparecen tareas que tus compañeros sí pueden ver, solicita apoyo.
+      </div>
+
+      <br>
+
+      📧 <strong>Correo:</strong><br>
+
+      <a href="mailto:ayudaenlinea@redaliat.mx">
+        ayudaenlinea@redaliat.mx
+      </a>
+
+      <br><br>
+
+      📱 <strong>WhatsApp:</strong><br>
+
+      <a
+        href="https://wa.me/525578881566?text=Hola%2C%20tengo%20un%20problema%20con%20Brightspace"
+        target="_blank"
+      >
+        55 7888 1566
+      </a>
+
+      <div class="alert alert-success">
+
+        📌 Para recibir ayuda más rápido incluye:
+
+        <br><br>
+
+        • Nombre completo<br>
+        • ID (E+00000+)<br>
+        • Licenciatura<br>
+        • Campus<br>
+        • Captura del problema, si es posible
+
+      </div>
+
+    `
+
+  },
+
+
+  /* ==============================
+     CONTRASEÑA
+  ============================== */
+
+  password: {
+
+    question:
+      "¿Olvidaste tu contraseña? Estos son los medios para solicitar ayuda.",
+
+    answer: `
+
+      <span class="label">RECUPERAR ACCESO</span>
+
+      Si olvidaste la contraseña de Brightspace o de tu correo institucional:
+
+      <div class="step">
+        📧 Escribe a:
+        <br>
+        <a href="mailto:ayudaenlinea@redaliat.mx">
+          ayudaenlinea@redaliat.mx
+        </a>
+      </div>
+
+      <div class="step">
+        📱 También puedes comunicarte por WhatsApp:
+        <br>
+        <a
+          href="https://wa.me/525578881566?text=Hola%2C%20olvid%C3%A9%20mi%20contrase%C3%B1a"
+          target="_blank"
+        >
+          55 7888 1566
+        </a>
+      </div>
+
+      <div class="alert alert-warning">
+
+        🔐 Nunca envíes tu contraseña actual por correo o WhatsApp.
+
+      </div>
+
+      Incluye:
+
+      <br><br>
+
+      • Nombre completo<br>
+      • ID<br>
+      • Carrera<br>
+      • Campus
+
+    `
+
+  },
+
+
+  /* ==============================
+     CORREO + AUTHENTICATOR
+  ============================== */
+
+  correo: {
+
+    question:
+      "¿Te aparece Microsoft Authenticator al intentar entrar a tu correo?",
+
+    answer: `
+
+      <span class="label">ACCESO AL CORREO</span>
+
+      En ocasiones, al iniciar sesión en el correo institucional puede solicitarse una verificación mediante Microsoft Authenticator.
+
+      <br><br>
+
+      Si necesitas utilizar otro método de verificación y la pantalla te muestra la opción:
+
+      <div class="step">
+        <strong>1.</strong> Selecciona
+        <strong>“Usar otra cuenta”</strong>
+        o la opción equivalente que aparezca en pantalla.
+      </div>
+
+      <div class="step">
+        <strong>2.</strong> Revisa si Microsoft ofrece
+        <strong>otro método de verificación</strong>.
+      </div>
+
+      <div class="step">
+        <strong>3.</strong> Selecciona únicamente un método que tengas autorizado y puedas utilizar.
+      </div>
+
+      <div class="step">
+        <strong>4.</strong> Continúa siguiendo las instrucciones que aparezcan en pantalla.
+      </div>
+
+      <div class="alert alert-warning">
+
+        ⚠️ Las opciones disponibles pueden variar según la configuración de tu cuenta. Si no aparece otro método, no intentes repetidamente opciones al azar.
+
+      </div>
+
+      <div class="alert alert-success">
+
+        💡 Si sigues sin poder acceder, solicita apoyo al área de Sistemas para revisar el método de autenticación de tu cuenta.
+
+      </div>
+
+    `
+
+  },
+
+
+  /* ==============================
+     OFFICE
+  ============================== */
+
+  office: {
+
+    question:
+      "¿Tienes dudas sobre la licencia de Office?",
+
+    answer: `
+
+      <span class="label">OFFICE 365</span>
+
+      Tu cuenta institucional incluye acceso a Office 365 en línea.
+
+      <div class="step">
+        🌐 Puedes utilizar Word, Excel, PowerPoint y otras herramientas desde el navegador, según las aplicaciones disponibles para tu cuenta.
+      </div>
+
+      <div class="alert alert-warning">
+
+        ⚠️ Evita instalar versiones no autorizadas o utilizar activadores.
+
+      </div>
+
+      <div class="alert alert-success">
+
+        💡 Si tienes problemas con tu cuenta, utiliza los medios oficiales de soporte.
+
+      </div>
+
+    `
+
+  },
+
+
+  /* ==============================
+     SEGURIDAD
+  ============================== */
+
+  seguridad: {
+
+    question:
+      "🚨 Si recibiste un correo diciendo que tu cuenta será desactivada, primero revisa esto.",
+
+    answer: `
+
+      <span class="label">SEGURIDAD</span>
+
+      Los mensajes que amenazan con cerrar, suspender o desactivar una cuenta y te piden iniciar sesión mediante un enlace deben tratarse como <strong>sospechosos</strong>.
+
+      <div class="alert alert-danger">
+
+        🚨 <strong>NO HAGAS CLIC EN EL ENLACE</strong> si no estás seguro de que el mensaje sea legítimo.
+
+      </div>
+
+      <div class="step">
+        <strong>1.</strong> No abras enlaces ni archivos adjuntos sospechosos.
+      </div>
+
+      <div class="step">
+        <strong>2.</strong> No introduzcas tu contraseña en una página a la que llegaste desde ese correo.
+      </div>
+
+      <div class="step">
+        <strong>3.</strong> Comprueba la dirección real del remitente.
+      </div>
+
+      <div class="step">
+        <strong>4.</strong> Si tienes dudas, consulta directamente con Sistemas.
+      </div>
+
+      <div class="alert alert-warning">
+
+        🔐 <strong>Regla sencilla:</strong><br>
+        Si un correo te asusta, te mete prisa y te pide iniciar sesión desde un enlace, detente y verifica primero.
+
+      </div>
+
+      <div class="alert alert-success">
+
+        ✅ Es más seguro entrar al servicio escribiendo tú mismo la dirección oficial en el navegador que utilizando un enlace sospechoso del correo.
+
+      </div>
+
+    `
 
   }
 
 };
 
 
-/* ==================================
+/* ==========================================
    ELEMENTOS
-================================== */
+========================================== */
 
 const chat = document.getElementById("chat-messages");
 
 
-/* ==================================
-   AGREGAR MENSAJE
-================================== */
+/* ==========================================
+   MENSAJE
+========================================== */
 
 function addMessage(text, sender = "bot") {
 
@@ -972,106 +1070,99 @@ function addMessage(text, sender = "bot") {
 }
 
 
-/* ==================================
+/* ==========================================
    OPCIONES
-================================== */
+========================================== */
 
 function showOptions(options) {
 
-  const optDiv = document.createElement("div");
+  const container = document.createElement("div");
 
-  optDiv.classList.add("options");
+  container.classList.add("options");
 
 
-  options.forEach(opt => {
+  options.forEach(option => {
 
-    const btn = document.createElement("button");
+    const button = document.createElement("button");
 
-    btn.classList.add("chip");
+    button.classList.add("chip");
 
-    btn.innerHTML = `
-      <span class="option-icon">
-        ${opt.icon}
+
+    button.innerHTML = `
+
+      <span class="icon">
+        ${option.icon}
       </span>
 
       <span>
-        ${opt.text}
+        ${option.text}
       </span>
+
     `;
 
 
-    btn.onclick = () => {
+    button.onclick = () => {
 
-      handleOption(opt);
+      handleOption(option);
 
     };
 
 
-    optDiv.appendChild(btn);
+    container.appendChild(button);
 
   });
 
 
-  chat.appendChild(optDiv);
+  chat.appendChild(container);
 
   chat.scrollTop = chat.scrollHeight;
 
 }
 
 
-/* ==================================
-   EFECTO ESCRIBIENDO
-================================== */
+/* ==========================================
+   ESCRIBIENDO
+========================================== */
 
-function typingEffect(callback, text = "") {
+function typingEffect(callback) {
 
-  const typingDiv = document.createElement("div");
+  const typing = document.createElement("div");
 
-  typingDiv.classList.add("typing");
+  typing.classList.add("typing");
 
-  typingDiv.innerHTML = `
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
+  typing.innerHTML = `
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
   `;
 
 
-  chat.appendChild(typingDiv);
+  chat.appendChild(typing);
 
   chat.scrollTop = chat.scrollHeight;
-
-
-  const delay = Math.min(
-
-    Math.max(text.length * 10, 500),
-
-    1400
-
-  );
 
 
   setTimeout(() => {
 
-    if (typingDiv.parentNode) {
-
-      typingDiv.remove();
-
-    }
+    typing.remove();
 
     callback();
 
-  }, delay);
+  }, 650);
 
 }
 
 
-/* ==================================
-   MOSTRAR SISTEMAS
-================================== */
+/* ==========================================
+   MOSTRAR SECCIÓN
+========================================== */
 
-function renderSystems() {
+function showSection(key) {
 
-  const section = menu.sistemas;
+  const section = menu[key];
+
+
+  if (!section) return;
 
 
   typingEffect(() => {
@@ -1085,129 +1176,147 @@ function renderSystems() {
     );
 
 
-    showOptions(
+    if (section.options) {
 
-      section.options
+      showOptions(section.options);
 
-    );
+    }
 
-  }, section.question);
+
+    if (section.answer) {
+
+      setTimeout(() => {
+
+        addMessage(
+
+          section.answer,
+
+          "bot"
+
+        );
+
+
+        showNavigation();
+
+      }, 200);
+
+    }
+
+  });
 
 }
 
 
-/* ==================================
-   MANEJAR OPCIÓN
-================================== */
+/* ==========================================
+   NAVEGACIÓN
+========================================== */
 
-function handleOption(opt) {
+function showNavigation() {
+
+  const navigation = [
+
+    {
+      text: "⬅️ Ver temas de Sistemas",
+      icon: "↩️",
+      next: "inicio"
+    }
+
+  ];
+
+
+  showOptions(navigation);
+
+}
+
+
+/* ==========================================
+   MANEJAR OPCIÓN
+========================================== */
+
+function handleOption(option) {
 
   addMessage(
 
-    opt.text,
+    option.text,
 
     "user"
 
   );
 
 
-  typingEffect(() => {
-
-    addMessage(
-
-      opt.answer,
-
-      "bot"
-
-    );
-
+  if (option.next) {
 
     setTimeout(() => {
 
-      addMessage(
-
-        "¿Necesitas consultar otro tema de Sistemas? 👇",
-
-        "bot"
-
-      );
-
-
-      showOptions(
-
-        menu.sistemas.options
-
-      );
+      showSection(option.next);
 
     }, 250);
 
-  }, opt.answer);
+  }
 
 }
 
 
-/* ==================================
+/* ==========================================
    BIENVENIDA
-================================== */
+========================================== */
 
-function showWelcome() {
+function welcome() {
 
   addMessage(`
 
-    <div class="welcome-card">
+    <div class="welcome">
 
       <div class="welcome-title">
-        👋 ¡Hola! Bienvenido
+        👋 ¡Hola! Soy tu asistente de Sistemas
       </div>
 
       <div class="welcome-text">
-        Soy el asistente virtual del área de
-        <strong>Sistemas de UTAN Industrias</strong>.
+
+        Estoy aquí para ayudarte con problemas
+        frecuentes de acceso, correo, Brightspace,
+        contraseñas, Office y seguridad.
+
         <br><br>
-        Estoy aquí para ayudarte a resolver
-        problemas frecuentes de acceso,
-        Brightspace, contraseñas y Office 365.
+
+        <strong>No necesitas escribir una pregunta.</strong>
+        Solo selecciona la opción que más se parezca
+        a tu problema.
+
       </div>
 
     </div>
 
   `, "bot");
 
+
+  setTimeout(() => {
+
+    showSection("inicio");
+
+  }, 450);
+
 }
 
 
-/* ==================================
+/* ==========================================
    REINICIAR
-================================== */
+========================================== */
 
 function restartChat() {
 
   chat.innerHTML = "";
 
-  showWelcome();
-
-  setTimeout(() => {
-
-    renderSystems();
-
-  }, 400);
+  welcome();
 
 }
 
 
-/* ==================================
+/* ==========================================
    INICIO
-================================== */
+========================================== */
 
-showWelcome();
-
-
-setTimeout(() => {
-
-  renderSystems();
-
-}, 500);
-
+welcome();
 
 </script>
 
